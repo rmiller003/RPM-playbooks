@@ -1,0 +1,11 @@
+---
+all:
+ansible_host1: 192.168.50.256 
+ansible_user: osboxes 
+ansible_pass: osboxes.org
+ansible_port: 22
+
+ansible_host2: 192.168.50.120 
+ansible_user: osboxes
+ansible_pass: osboxes.org
+ansible_port: 22
