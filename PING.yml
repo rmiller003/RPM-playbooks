@@ -1,2 +1,0 @@
----
-  ansible -i inventory_file -m ping all
