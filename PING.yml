@@ -3,5 +3,4 @@
   hosts: all
   connection: ssh
   gather fact: True
-  task: 
-    PING
+ 
