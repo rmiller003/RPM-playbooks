@@ -6,4 +6,5 @@
   tasks:
     - debug:
         msg: Hello World!!!
-    - cli: poweroff
+    - command: poweroff
+    ignore_errors: yes
