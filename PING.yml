@@ -5,6 +5,5 @@
   gather_facts: True
   tasks:
     - debug:
-        msg: Hello world
-             poweroff
+        msg: Hello World!!!
     - power_off: True
