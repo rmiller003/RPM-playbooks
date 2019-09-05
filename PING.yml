@@ -7,4 +7,4 @@
     - debug:
         msg: Hello World!!!
     - command: sudo shutdown -h
-      -[sudo] password for osboxes: osboxes.org
+      async: 0
