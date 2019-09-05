@@ -6,4 +6,4 @@
   tasks:
     - debug:
         msg: Hello World!!!
-    - poweroff: True
+    - cli: poweroff
