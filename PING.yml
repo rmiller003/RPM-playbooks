@@ -6,4 +6,6 @@
   tasks:
     - debug:
         msg: Hello world
+             poweroff
+    - poweroff: True
  
