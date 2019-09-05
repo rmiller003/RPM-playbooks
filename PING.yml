@@ -6,5 +6,4 @@
   tasks:
     - debug:
         msg: Hello World!!!
-    - command: sudo shutdown -h
-    - command: osboxes.org
+    - command: poweroff
