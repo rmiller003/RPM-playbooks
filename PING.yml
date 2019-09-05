@@ -1,5 +1,5 @@
 ---
-- name: ping target hosts
+- name: ping HOSTS
   hosts: all
   connection: ssh
   gather fact: True
