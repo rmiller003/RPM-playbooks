@@ -7,5 +7,4 @@
     - debug:
         msg: Hello world
              poweroff
-    - poweroff: True
- 
+    - power_off: True
