@@ -1,0 +1,26 @@
+---
+- name: Run SOP router check
+  hosts: "store_{{ store_number }}"
+  gather_facts: False
+  connection: network_cli
+
+  tasks:
+
+# Take an input of an IP and, if set, do a traceroute to that IP
+
+    - name: "Call store type checks"
+      include_role:
+        name: "check_store_routers"
+      when: inventory_hostname in groups['primary_routers'] or inventory_hostname in groups['secondary_routers']
+
+    - name: Get primary router output
+      set_stats:
+        data:
+          primary_router_output: "{{ command_output }}"
+      when: inventory_hostname in groups['primary_routers']
+
+    - name: Get secondary rounter output
+      set_stats:
+        data:
+          secondary_router_output: "{{ command_output }}"
+      when: inventory_hostname in groups['secondary_routers']
