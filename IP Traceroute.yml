@@ -1,6 +1,6 @@
 ---
 - name: Run SOP router check
-  hosts: "store_{{ 01091 }}"
+  hosts: "store_{{ 01091-R1 }}"
   gather_facts: False
   connection: network_cli
 
