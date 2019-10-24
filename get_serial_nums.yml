@@ -1,0 +1,93 @@
+---
+- name: Generate serial numbers of devices
+  hosts: serial_number_devices
+  connection: network_cli
+  gather_facts: False
+  force_handlers: True 
+  tasks:
+    - name: "Gather hardware facts"
+      ios_facts:
+        gather_subset:
+          - hardware
+
+    - name: "Get the Certificate SN"
+      ios_command:
+        commands:
+          - "show crypto pki certificates CISCO_IDEVID_SUDI"
+      register: ios_cert_results
+
+    - debug:
+        msg: "{{ ios_cert_results }}"
+        verbosity: 2
+
+    - name: "Extract the cert info"
+      set_fact:
+        cert_info: "{{ ios_cert_results.stdout[0] | parse_cli('parsers/parse_crypto_pki_output.yml') }}"
+
+    - debug:
+        msg: "{{ cert_info }}"
+        verbosity: 2
+
+    - debug:
+        msg: "{{ hostvars[item] }}"
+        verbosity: 2
+      loop: "{{ansible_play_batch}}"
+
+    - name: Create Temporary file
+      tempfile:
+        state: file
+        prefix: "serial_num_report."
+        suffix: ".csv"
+      register: reportfile 
+      notify: clean up temp file
+      run_once: true
+      delegate_to: localhost
+
+    - name: Template file
+      template: 
+        newline_sequence: "\r\n"
+        src: templates/sn_report.csv.j2
+        dest: "{{reportfile.path}}"
+      run_once: true
+      delegate_to: localhost
+
+    - block: 
+      - name: Send Mail Excel Serial Numbers
+        mail: 
+         # host: 10.62.188.30
+         # port: 587
+          to: "{{tower_user_email}}"
+          subject: Serial numbers output collected 
+          body: See attached report file. 
+          attach: 
+            - "{{reportfile.path}}"
+        run_once: true
+        delegate_to: localhost 
+      rescue:
+        - name: Mail Error 
+          debug: 
+            msg:
+              -  "Still waiting for firewall rule." 
+              - "{{lookup('file',reportfile.path)}}"
+          run_once: true 
+          delegate_to: localhost
+
+
+  handlers:
+    - name: clean up temp file
+      file: 
+        path: "{{reportfile.path}}"
+        state: absent 
+      run_once: true
+      delegate_to: localhost
+
+
+
+
+
+#ansible_net_model
+#ansible_net_serialnum
+#<controller profile>
+#ansible_net_hostname
+#<sudi number>
+#<certificate sn>
