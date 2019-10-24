@@ -1,5 +1,5 @@
 ---
 - name: ping HOSTS
-  hosts: all
-  connection: ssh
-  gather_facts: True
+  hosts: "store_{{ 01091 }}"
+  gather_facts: true
+  connection: network_cli
