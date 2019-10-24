@@ -1,6 +1,6 @@
 ---
 - name: ping HOSTS
-- hosts: 10.124.136.5, 10.124.136.6
-- gather_facts: true
+- hosts: localhost
+- gather_facts: false
   tasks:
     - ping: ~
