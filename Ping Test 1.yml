@@ -1,4 +1,6 @@
 ---
-- hosts: all
+- name: ping HOSTS
+- hosts: "store_{{ 01091 }}"
+- gather_facts: true
   tasks:
     - ping: ~
