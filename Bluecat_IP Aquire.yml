@@ -3,7 +3,7 @@
   gather_facts: false
   vars:
     ansible_connection: local
-    bluecat_url: https://10.64.198.203
+    bluecat_url: https://10.64.198.203/app
     bluecat_configuration_name: "Loblaw_Production"
     bluecat_dns_view: "Corporate"
     address_properties: excludeDHCPRange=true
