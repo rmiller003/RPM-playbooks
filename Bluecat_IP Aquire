@@ -1,0 +1,20 @@
+name: Deploy IP addresses
+  hosts: localhost
+  vars:
+   name: Deploy and retire IP addresses
+  hosts: localhost
+  vars:
+   ansible_connection: local
+   bluecat_url: https://10.64.198.203
+   bluecat_configuration_name: "Loblaw_Pproduction"
+   bluecat_dns_view: "Corporate"
+   address_properties: excludeDHCPRange=true
+   validate_certs: no
+  gather_facts: false
+  tasks:
+    - name: Get IP Address 
+      include_role: 
+        name: bluecat-ipam-rest
+      vars: 
+        target_hostname: "ansibletest.example.com"
+        state: aquire
