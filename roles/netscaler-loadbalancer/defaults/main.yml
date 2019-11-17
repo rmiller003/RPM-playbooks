@@ -1,0 +1,6 @@
+---
+# defaults file for netscaler-loadbalancer
+lb_monitor_type: HTTP-ECV
+service_group_type: HTTP
+lb_service_type: HTTP
+loadbalancing_method: ROUNDROBIN

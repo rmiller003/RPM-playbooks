@@ -1,0 +1,43 @@
+---
+- name: Create server(s) in Netscaler
+  netscaler_server:
+    nsip: "{{ netscaler_url }}"
+    nitro_user: "{{ nitro_username }}"
+    nitro_pass: "{{ nitro_password }}"
+    state: present
+    name: "{{ item.servername }}"
+    ipaddress: "{{ item.ipaddress }}"
+  loop: "{{ backend_servers }}"
+
+- name: Create load balancing monitor
+  netscaler_lb_monitor:
+    nsip: "{{ netscaler_url }}"
+    nitro_user: "{{ nitro_username }}"
+    nitro_pass: "{{ nitro_password }}"
+    state: present
+    monitorname: "{{ lb_monitor_name }}"
+    type: "{{ lb_monitor_type }}"
+
+- name: Create Netscaler service group
+  netscaler_servicegroup:
+    nsip: "{{ netscaler_url }}"
+    nitro_user: "{{ nitro_username }}"
+    nitro_pass: "{{ nitro_password }}"
+    state: present
+    servicegroupname: "{{ service_group_name }}"
+    servicetype: "{{ service_group_type }}"
+    servicemembers: "{{ backend_servers }}"
+    monitorbindings:
+    - monitorname: "{{ lb_monitor_name }}"
+
+- name: Create and configure Netscaler vServer
+  netscaler_lb_vserver:
+    nsip: "{{ netscaler_url }}"
+    nitro_user: "{{ nitro_username }}"
+    nitro_pass: "{{ nitro_password }}"
+    state: present
+    name: "{{ lb_vserver_name }}"
+    servicetype: "{{ service_group_type }}"
+    servicegroupbindings:
+    - servicegroupname: "{{ service_group_name }}"
+    lbmethod: "{{ loadbalancing_method }}"
