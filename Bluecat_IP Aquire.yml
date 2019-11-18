@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: RPM Inventory 1
   gather_facts: false
   vars:
     ansible_connection: local
