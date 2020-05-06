@@ -1,0 +1,12 @@
+---
+- hosts: host.Ubuntu1.192.168.50.403
+  become: true
+  vars:
+  tasks:
+
+
+    - name: Get plex Key
+      shell: wget -q -O - https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add -
+su
+    - name: Add plex repo Reop
+      copy: content="deb https://downloads.plex.tv/repo/deb public main" dest=/etc/apt/sources.list.d/plexmediaserver.list owne
