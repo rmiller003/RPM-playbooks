@@ -1,6 +1,6 @@
 ---
 - name: Add a user
-  hosts: all
+  hosts: 192.168.50.76
   gather_facts: false
   tasks:
     - Add User
