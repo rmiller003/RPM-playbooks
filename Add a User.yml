@@ -4,7 +4,6 @@
   gather_facts: false
   tasks:
     - Add User
-    win_user:
       name: ansible
       password: "@ns1b13"
       state: present
