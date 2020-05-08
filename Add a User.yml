@@ -5,7 +5,6 @@
   tasks:
     - name: Add User
       telnet:
-      win_user:
         name: ansible
         password: "nov41972"
         state: present
