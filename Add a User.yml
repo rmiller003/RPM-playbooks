@@ -3,8 +3,8 @@
   hosts: 192.168.50.76
   gather_facts: false
   tasks:
-    - Add User
+    - name: Add User
       win_user:
-       name: ansible
-       password: "@ns1b13"
-       state: present
+        name: ansible
+        password: "nov41972"
+        state: present
