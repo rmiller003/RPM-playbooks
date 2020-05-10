@@ -2,7 +2,6 @@
 - name: Add a user
   hosts: 192.168.50.76
   gather_facts: false
-  connection: telnet
   tasks:
     - name: Add User
       win_user:
